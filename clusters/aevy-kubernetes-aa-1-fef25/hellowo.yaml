@@ -7,7 +7,6 @@ metadata:
     app: hellowo
     app.kubernetes.io/managed-by: simple-k8s
 spec:
-  replicas: 4
   selector:
     matchLabels:
       app: hellowo
@@ -68,3 +67,26 @@ spec:
                 name: hellowo
                 port:
                   number: 80
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hellowo
+  namespace: simple-k8s
+  labels:
+    app: hellowo
+    app.kubernetes.io/managed-by: simple-k8s
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hellowo
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70

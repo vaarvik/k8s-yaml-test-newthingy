@@ -57,7 +57,7 @@ metadata:
     app.kubernetes.io/managed-by: simple-k8s
 spec:
   rules:
-    - host: hello.aevy.app
+    - host: hello2.aevy.app
       http:
         paths:
           - path: /

@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: hellowo
   namespace: simple-k8s
+  annotations:
+    simple-k8s/display-name: "Hello World"
   labels:
     app: hellowo
     app.kubernetes.io/managed-by: simple-k8s
